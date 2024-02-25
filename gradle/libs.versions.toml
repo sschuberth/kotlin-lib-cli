@@ -1,0 +1,16 @@
+[versions]
+detektPlugin = "1.23.6"
+kotlinPlugin = "1.9.23"
+
+clikt = "4.3.0"
+kotest = "5.8.1"
+
+[libraries]
+# These are Maven coordinates for Gradle plugins, which is necessary to use them in precompiled plugin scripts.
+plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detektPlugin" }
+plugin-detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detektPlugin" }
+plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinPlugin" }
+
+clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
