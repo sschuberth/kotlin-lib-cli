@@ -1,0 +1,9 @@
+# Formatting rules are implemented via the ktlint plugin. As ktlint does not allow exceptions to rules, we need to
+# disable respective rules completely.
+formatting:
+  ImportOrdering:
+    active: false
+
+naming:
+  InvalidPackageDeclaration:
+    active: false
