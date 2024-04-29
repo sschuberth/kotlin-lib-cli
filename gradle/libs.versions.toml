@@ -2,7 +2,7 @@
 detektPlugin = "1.23.6"
 kotlinPlugin = "1.9.23"
 
-clikt = "4.3.0"
+clikt = "4.4.0"
 kotest = "5.8.1"
 
 [libraries]
