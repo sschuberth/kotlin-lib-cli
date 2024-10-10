@@ -1,6 +1,6 @@
 [versions]
 detektPlugin = "1.23.7"
-kotlinPlugin = "2.0.20"
+kotlinPlugin = "2.0.21"
 
 clikt = "5.0.1"
 kotest = "5.9.1"
