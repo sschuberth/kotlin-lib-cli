@@ -3,7 +3,7 @@ detektPlugin = "1.23.8"
 kotlinPlugin = "2.3.0"
 
 clikt = "5.1.0"
-kotest = "6.1.0"
+kotest = "6.1.1"
 
 [libraries]
 # These are Maven coordinates for Gradle plugins, which are required for use in precompiled plugin scripts.
