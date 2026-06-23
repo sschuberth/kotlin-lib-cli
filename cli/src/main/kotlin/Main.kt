@@ -15,6 +15,6 @@ fun main(args: Array<String>) {
 
 class Main : CliktCommand() {
     override fun run() {
-        echo(Theme.Companion.Default.info(sayHello()))
+        echo(Theme.Default.info(sayHello()))
     }
 }
