@@ -1,8 +1,3 @@
-import org.gradle.accessors.dm.LibrariesForLibs
-
-private val Project.libs: LibrariesForLibs
-    get() = extensions.getByType()
-
 plugins {
     // Use Kotlin DSL to write precompiled script plugins.
     `kotlin-dsl`
@@ -14,8 +9,8 @@ repositories {
 }
 
 dependencies {
-    implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
-
     implementation(libs.plugin.detekt)
     implementation(libs.plugin.kotlin)
+    implementation(libs.plugin.sortDependencies)
+    implementation(libs.plugin.tapmoc)
 }

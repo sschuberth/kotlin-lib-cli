@@ -1,69 +1,41 @@
-import io.gitlab.arturbosch.detekt.Detekt
-import io.gitlab.arturbosch.detekt.report.ReportMergeTask
+import dev.detekt.gradle.Detekt
+import dev.detekt.gradle.report.ReportMergeTask
 
-import org.gradle.accessors.dm.LibrariesForLibs
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-
-import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-private val Project.libs: LibrariesForLibs
-    get() = extensions.getByType()
+val libsCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 plugins {
-    kotlin("jvm")
-    id("io.gitlab.arturbosch.detekt")
-}
+    // Apply precompiled script plugins.
+    id("base-conventions")
 
-repositories {
-    mavenCentral()
+    // Apply third-party plugins.
+    id("dev.detekt")
 }
 
 dependencies {
-    detektPlugins(libs.plugin.detekt.formatting)
+    detektPlugins(libsCatalog.findLibrary("plugin-detekt-formatting").get())
 }
 
 detekt {
     // Only configure differences to the default.
     buildUponDefaultConfig = true
-    config.from(files("$rootDir/.detekt.yml"))
+    config = files("$rootDir/.detekt.yml")
 
-    source.from(fileTree(".") { include("*.gradle.kts") }, "src/funTest/kotlin")
-
-    basePath = rootDir.path
-}
-
-testing {
-    suites {
-        withType<JvmTestSuite>().configureEach {
-            useJUnitJupiter()
-
-            dependencies {
-                implementation(libs.kotest.assertions.core)
-                implementation(libs.kotest.runner.junit5)
-            }
-        }
-
-        register<JvmTestSuite>("funTest")
+    source = fileTree(rootDir) {
+        include("*.gradle.kts")
+        include("buildSrc/src/**/kotlin/**")
+    } + fileTree(projectDir) {
+        include("*.gradle.kts")
+        include("src/**/kotlin/**")
     }
-}
 
-// Associate the "funTest" compilation with the "main" compilation to be able to access "internal" objects from
-// functional tests.
-kotlin.target.compilations.apply {
-    getByName("funTest").associateWith(getByName(KotlinCompilation.MAIN_COMPILATION_NAME))
+    basePath = rootDir
 }
-
-val javaVersion = JavaVersion.current()
-val maxKotlinJvmTarget = runCatching { JvmTarget.fromTarget(javaVersion.majorVersion) }
-    .getOrDefault(enumValues<JvmTarget>().max())
 
 tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
         allWarningsAsErrors = true
-        jvmTarget = maxKotlinJvmTarget
     }
 }
 
@@ -77,42 +49,20 @@ val mergeDetektReports = if (rootProject.tasks.findByName(mergeDetektReportsTask
 }
 
 tasks.withType<Detekt>().configureEach detekt@{
-    jvmTarget = maxKotlinJvmTarget.target
-
     exclude {
         "/build/generated/" in it.file.absolutePath
     }
 
     reports {
         html.required = false
-
-        // TODO: Enable this once https://github.com/detekt/detekt/issues/5034 is resolved and use the merged
-        //       Markdown file as a GitHub Action job summary, see
-        //       https://github.blog/2022-05-09-supercharging-github-actions-with-job-summaries/.
-        md.required = false
+        markdown.required = false
 
         sarif.required = true
-        txt.required = false
-        xml.required = false
     }
 
     mergeDetektReports.configure {
-        input.from(this@detekt.sarifReportFile)
+        input.from(this@detekt.reports.sarif.outputLocation)
     }
 
     finalizedBy(mergeDetektReports)
-}
-
-tasks.withType<Test>().configureEach {
-    testLogging {
-        events = setOf(TestLogEvent.STARTED, TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
-        exceptionFormat = TestExceptionFormat.FULL
-        showCauses = false
-        showStackTraces = false
-        showStandardStreams = false
-    }
-}
-
-tasks.named("check") {
-    dependsOn(tasks["funTest"])
 }
