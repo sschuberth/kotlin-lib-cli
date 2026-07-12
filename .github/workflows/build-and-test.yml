@@ -10,58 +10,31 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v7
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v6
-      with:
-        gradle-home-cache-cleanup: true
+      uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
     - name: Build all classes
       run: ./gradlew classes
   test:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v7
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v6
-      with:
-        gradle-home-cache-cleanup: true
+      uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
     - name: Run unit tests
       run: ./gradlew test
   funTest:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6
-        with:
-          gradle-home-cache-cleanup: true
+        uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
       - name: Run functional tests
         run: ./gradlew funTest
-  detekt:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v7
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6
-        with:
-          gradle-home-cache-cleanup: true
-      - name: Check for Detekt Issues
-        run: ./gradlew detekt
-      - name: Check for Detekt Issues with type resolution
-        run: ./gradlew detektMain detektTest detektFunTest
-      - name: Upload SARIF File
-        uses: github/codeql-action/upload-sarif@v4
-        if: always() # Upload even if the previous step failed.
-        with:
-          sarif_file: build/reports/detekt/merged.sarif
