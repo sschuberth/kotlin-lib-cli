@@ -10,7 +10,7 @@ plugins {
     application
 
     // Apply precompiled script plugins.
-    id("kotlin-jvm-conventions")
+    id("kotlin-multiplatform-conventions")
 
     // Apply third-party plugins.
     alias(libs.plugins.graalVmNativeImage)
@@ -18,6 +18,7 @@ plugins {
 
 val javaLanguageVersion = project.property("javaLanguageVersion") as String
 
+/*
 application {
     applicationName = "template"
     mainClass = "dev.schuberth.template.cli.MainKt"
@@ -54,7 +55,7 @@ tasks.named<JavaExec>("run") {
         environment("FORCE_COLOR" to it)
     }
 }
-
+*/
 tasks.named<BuildNativeImageTask>("nativeCompile") {
     doFirst {
         // Gradle's "Copy" task cannot handle symbolic links, see https://github.com/gradle/gradle/issues/3982. That is

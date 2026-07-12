@@ -3,5 +3,5 @@ plugins {
     `java-library`
 
     // Apply precompiled script plugins.
-    id("kotlin-jvm-conventions")
+    id("kotlin-multiplatform-conventions")
 }
