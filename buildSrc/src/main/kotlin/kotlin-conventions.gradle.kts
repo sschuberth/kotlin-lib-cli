@@ -50,7 +50,7 @@ val mergeDetektReports = if (rootProject.tasks.findByName(mergeDetektReportsTask
 
 tasks.withType<Detekt>().configureEach detekt@{
     exclude {
-        "/build/generated/" in it.file.absolutePath
+        "/build/generated/" in it.file.absoluteFile.invariantSeparatorsPath
     }
 
     reports {
