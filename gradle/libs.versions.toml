@@ -1,5 +1,5 @@
 [versions]
-detektPlugin = "2.0.0-alpha.3"
+detektPlugin = "2.0.0-alpha.5"
 kotlinPlugin = "2.3.21"
 sortDependenciesPlugin = "0.19.0"
 tapmocPlugin = "0.4.2"
