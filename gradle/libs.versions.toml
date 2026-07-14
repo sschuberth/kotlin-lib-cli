@@ -1,7 +1,7 @@
 [versions]
 detektPlugin = "2.0.0-alpha.5"
 graalVmNativeImagePlugin = "1.1.4"
-kotlinPlugin = "2.3.21"
+kotlinPlugin = "2.4.10"
 sortDependenciesPlugin = "0.19.0"
 tapmocPlugin = "0.4.2"
 
