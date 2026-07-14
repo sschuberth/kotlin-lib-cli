@@ -25,6 +25,7 @@ application {
 
 dependencies {
     implementation(libs.clikt)
+    implementation(libs.log4j.core)
     implementation(projects.lib)
 }
 

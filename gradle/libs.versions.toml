@@ -7,6 +7,8 @@ tapmocPlugin = "0.4.2"
 
 clikt = "5.1.0"
 kotest = "6.2.2"
+log4j = "2.26.1"
+log4jApiKotlin = "1.5.0"
 
 [plugins]
 graalVmNativeImage = { id = "org.graalvm.buildtools.native", version.ref = "graalVmNativeImagePlugin" }
@@ -22,3 +24,5 @@ plugin-tapmoc = { module = "com.gradleup.tapmoc:tapmoc-gradle-plugin", version.r
 clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+log4j-api-kotlin = { module = "org.apache.logging.log4j:log4j-api-kotlin", version.ref = "log4jApiKotlin" }
+log4j-core = { module = "org.apache.logging.log4j:log4j-core", version.ref = "log4j" }
