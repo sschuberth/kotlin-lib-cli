@@ -24,9 +24,9 @@ application {
 }
 
 dependencies {
+    implementation(projects.lib)
     implementation(libs.clikt)
     implementation(libs.log4j.core)
-    implementation(projects.lib)
 }
 
 tasks.withType<JavaExec>().configureEach {
