@@ -11,7 +11,7 @@ dependencyAnalysis {
             onUnusedDependencies {
                 severity("fail")
 
-                // Exclude modules which are automatically added by the "ort-kotlin-conventions".
+                // Exclude modules which are automatically added by the "kotlin-jvm-conventions".
                 exclude("org.junit.jupiter:junit-jupiter")
                 exclude(libs.kotest.runner.junit5)
                 exclude(libs.kotest.assertions.core)
