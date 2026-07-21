@@ -6,7 +6,7 @@ sortDependenciesPlugin = "0.20.0"
 tapmocPlugin = "0.4.2"
 
 clikt = "5.1.0"
-kotest = "6.2.2"
+kotest = "6.2.3"
 log4j = "2.26.1"
 log4jApiKotlin = "1.5.0"
 
