@@ -13,7 +13,7 @@ plugins {
 
     // Required for the build-health plugin. Keep the version in sync with the one from the version catalog. See:
     // https://github.com/autonomousapps/dependency-analysis-gradle-plugin/wiki/Adding-to-your-project
-    id("org.jetbrains.kotlin.jvm").version("2.3.21").apply(false)
+    id("org.jetbrains.kotlin.jvm").version("2.4.10").apply(false)
 }
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
