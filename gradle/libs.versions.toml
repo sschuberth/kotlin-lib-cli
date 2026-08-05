@@ -1,5 +1,5 @@
 [versions]
-detektPlugin = "2.0.0-alpha.5"
+detektPlugin = "2.0.0-alpha.6"
 graalVmNativeImagePlugin = "1.1.6"
 kotlinPlugin = "2.4.10"
 sortDependenciesPlugin = "0.20.0"
