@@ -1,6 +1,6 @@
 [versions]
 detektPlugin = "2.0.0-alpha.6"
-graalVmNativeImagePlugin = "1.1.16"
+graalVmNativeImagePlugin = "1.1.17"
 kotlinPlugin = "2.4.21"
 sortDependenciesPlugin = "0.21.0"
 tapmocPlugin = "0.5.0"
